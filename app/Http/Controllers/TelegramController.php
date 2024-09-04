@@ -29,8 +29,9 @@ class TelegramController extends Controller
             // Відповідати на команди в групах і приватних чатах
             if ($chatType === 'group' || $chatType === 'supergroup' || $chatType === 'private') {
 
-                User::updateOrCreate(
+                User::firstOrCreate(
                     ['telegram_id' => $chatId],
+                    ['telegram_id' => $chatId, 'name' => $firstName]
                 );
 
                 if ($text === '/start') {
